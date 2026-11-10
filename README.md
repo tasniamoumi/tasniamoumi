@@ -20,5 +20,9 @@
 </p>
 
 <p align="center">
+  <a href="https://faunabehav-api.onrender.com/docs"><b>FaunaBehav live demo</b></a> · interactive API docs, login <code>admin</code> / <code>demo-password</code> (first load can take a minute)
+</p>
+
+<p align="center">
   <img src="cards/graph.svg" width="100%" alt="Contribution graph for the past year" />
 </p>
