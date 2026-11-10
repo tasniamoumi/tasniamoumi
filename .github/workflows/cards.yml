@@ -1,0 +1,84 @@
+name: Refresh profile cards
+
+on:
+  schedule:
+    - cron: "17 0 * * *"      # daily, 00:17 UTC (08:17 MYT)
+  workflow_dispatch:
+  push:
+    paths: ["render_cards.py", "assets/**", ".github/workflows/cards.yml"]
+
+permissions:
+  contents: write
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install fonttools (pyftsubset)
+        run: pip install "fonttools>=4.50"
+
+      - name: Fetch contribution calendar
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          LOGIN: ${{ github.repository_owner }}
+        run: |
+          TO=$(date -u +%Y-%m-%dT00:00:00Z)
+          FROM=$(date -u -d "365 days ago" +%Y-%m-%dT00:00:00Z)
+          gh api graphql -F login="$LOGIN" -F from="$FROM" -F to="$TO" -f query='
+            query($login:String!, $from:DateTime!, $to:DateTime!) {
+              user(login:$login) {
+                contributionsCollection(from:$from, to:$to) {
+                  contributionCalendar {
+                    totalContributions
+                    weeks { contributionDays { date contributionCount } }
+                  }
+                }
+              }
+            }' > /tmp/calendar.json
+          python3 - <<'PY'
+          import json, datetime as dt
+          cal = json.load(open("/tmp/calendar.json"))["data"]["user"]["contributionsCollection"]["contributionCalendar"]
+          days = [{"date": d["date"], "count": d["contributionCount"]}
+                  for w in cal["weeks"] for d in w["contributionDays"]]
+          json.dump({"login": "${{ github.repository_owner }}",
+                     "updated": dt.datetime.utcnow().isoformat(timespec="seconds") + "Z",
+                     "total": cal["totalContributions"], "days": days},
+                    open("data/contributions.json", "w"), indent=0)
+          print(len(days), "days,", cal["totalContributions"], "contributions")
+          PY
+
+      - name: Fetch featured repo metadata
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OWNER: ${{ github.repository_owner }}
+        run: |
+          python3 - <<'PY'
+          import json, os, subprocess, re
+          src = open("render_cards.py").read()
+          names = re.findall(r'"name":\s*"([^"]+)"', src.split("FEATURED = [")[1].split("]\n")[0])
+          out = []
+          for n in names:
+              r = json.loads(subprocess.check_output(["gh", "api", f"repos/{os.environ['OWNER']}/{n}"]))
+              out.append({"name": n, "language": r.get("language"), "stars": r.get("stargazers_count", 0),
+                          "forks": r.get("forks_count", 0), "pushed_at": r.get("pushed_at", ""), "url": r.get("html_url")})
+          json.dump(out, open("data/repos.json", "w"), indent=1)
+          print([ (o["name"], o["stars"]) for o in out ])
+          PY
+
+      - name: Render cards
+        run: python3 render_cards.py
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data cards
+          git diff --cached --quiet && echo "no changes" && exit 0
+          git commit -m "chore: refresh profile cards ($(date -u +%Y-%m-%d))"
+          git push
