@@ -44,6 +44,6 @@
 <line x1="606" y1="40" x2="606" y2="260" stroke="#232838"/>
 <g class="up" style="animation-delay:2.30s"><text class="mut" x="630" y="70" font-size="12">Current streak</text><text class="sb num" x="630" y="96" font-size="24" fill="#FFB454">0</text><text class="mut num" x="652" y="96" font-size="12">days</text></g>
 <g class="up" style="animation-delay:2.45s"><text class="mut" x="630" y="126" font-size="12">Longest streak</text><text class="sb num" x="630" y="152" font-size="24" fill="#EEF0F6">8</text><text class="mut num" x="652" y="152" font-size="12">days</text></g>
-<g class="up" style="animation-delay:2.60s"><text class="mut" x="630" y="182" font-size="12">Active days</text><text class="sb num" x="630" y="208" font-size="24" fill="#EEF0F6">19</text><text class="mut num" x="666" y="208" font-size="12">of 365</text></g>
+<g class="up" style="animation-delay:2.60s"><text class="mut" x="630" y="182" font-size="12">Active days</text><text class="sb num" x="630" y="208" font-size="24" fill="#EEF0F6">19</text><text class="mut num" x="666" y="208" font-size="12">of 366</text></g>
 <g class="up" style="animation-delay:2.75s"><text class="mut" x="630" y="238" font-size="12">Busiest day</text><text class="sb num" x="630" y="264" font-size="24" fill="#EEF0F6">08 Mar</text><text class="mut num" x="722" y="264" font-size="12">24 contributions</text></g>
 </svg>
