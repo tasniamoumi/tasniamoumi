@@ -62,15 +62,15 @@ FEATURED = [
 
 # ---------------------------------------------------------------- palette
 C = dict(
-    bg="#0B0D12",
-    card="#11141B",
-    card2="#161A23",
-    line="#232838",
-    text="#EEF0F6",
-    muted="#8A92A6",
-    accent="#FFB454",
-    accent2="#6FA8FF",
-    levels=["#1A1E29", "#4A3814", "#8A651F", "#C8902C", "#FFB454"],
+    bg="#140910",
+    card="#1B0D16",
+    card2="#25121F",
+    line="#3A1B2D",
+    text="#FFF0F6",
+    muted="#C79BB0",
+    accent="#FF6FA5",
+    accent2="#FFB3D1",
+    levels=["#2A1421", "#5A1F3D", "#9C2D63", "#E0498A", "#FF8FBF"],
 )
 W = 900  # full-width card viewBox width
 
@@ -194,6 +194,19 @@ def svg(width: int, height: int, body: str, css: str, title: str) -> str:
         f"{body}\n</svg>\n")
 
 
+def sparkle(x: float, y: float, r: float, color: str, cls: str = "breathe") -> str:
+    """4-point twinkle star."""
+    d = (f"M{x} {y - r} Q{x} {y} {x + r} {y} Q{x} {y} {x} {y + r} "
+         f"Q{x} {y} {x - r} {y} Q{x} {y} {x} {y - r}Z")
+    return f'<path class="{cls}" d="{d}" fill="{color}"/>'
+
+
+def heart(x: float, y: float, k: float, color: str, cls: str = "breathe") -> str:
+    """Small heart centred on (x, y); k scales it."""
+    return (f'<path class="{cls}" transform="translate({x} {y}) scale({k})" '
+            f'd="M0 4 C-8 -2 -5 -8 0 -4 C5 -8 8 -2 0 4Z" fill="{color}"/>')
+
+
 def write(name: str, content: str) -> None:
     (OUT / name).write_text(content, encoding="utf-8")
     print(f"  {name:22} {len(content.encode()) / 1024:6.1f} KB")
@@ -281,6 +294,13 @@ def card_hero(portrait: Path | None) -> None:
                     f'stroke-dasharray="{2 * 3.1416 * (r + 6):.0f}" stroke-dashoffset="{0 if STATIC else 2 * 3.1416 * (r + 6):.0f}" '
                     f'transform="rotate(-90 {cx} {cy})">{smil_draw(0.7, 1.0, 2 * 3.1416 * (r + 6))}</circle>'
                     f'<text class="serif" x="{cx}" y="{cy + 18}" text-anchor="middle" font-size="52" fill="{C["accent"]}">{esc(initials)}</text></g>')
+    # pink trinkets
+    body.append(sparkle(690, 46, 9, C["accent2"]))
+    body.append(sparkle(858, 52, 6, C["accent"]))
+    body.append(sparkle(866, 206, 9, C["accent2"]))
+    body.append(sparkle(700, 212, 5, C["accent"]))
+    body.append(heart(666, 120, 2.2, C["accent"]))
+    body.append(heart(884, 128, 1.5, C["accent2"]))
     write("hero.svg", svg(W, h, "\n".join(body), css, f"{NAME} — {TAGLINE}"))
 
 
