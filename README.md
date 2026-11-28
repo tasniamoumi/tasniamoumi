@@ -9,6 +9,8 @@
   <a href="https://github.com/tasniamoumi?tab=repositories"><img src="cards/tile-3.svg" width="32.5%" alt="Portfolio (in progress)" /></a>
 </p>
 
+<p align="center">🎀 ✦ ･ﾟ: *✧･ﾟ:* 🌸 *:･ﾟ✧*:･ﾟ ✦ 🎀</p>
+
 <p align="center">
   <img src="cards/activity.svg" width="100%" alt="Contributions per month, current and longest streak, active days and busiest day" />
 </p>
@@ -23,6 +25,10 @@
   <a href="https://faunabehav-api.onrender.com/docs"><b>FaunaBehav live demo</b></a> · interactive API docs, login <code>admin</code> / <code>demo-password</code> (first load can take a minute)
 </p>
 
+<p align="center">🎀 ✦ ･ﾟ: *✧･ﾟ:* 🌸 *:･ﾟ✧*:･ﾟ ✦ 🎀</p>
+
 <p align="center">
   <img src="cards/graph.svg" width="100%" alt="Contribution graph for the past year" />
 </p>
+
+<p align="center">🩷 thanks for stopping by ✨</p>
