@@ -16,37 +16,12 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/tasniamoumi/faunabehav-backend"><img src="cards/repo-1.svg" width="100%" alt="faunabehav-backend" /></a>
+  <img src="cards/pinned.svg" width="100%" alt="Pinned projects: faunabehav-backend, veil, leadops, handframe" />
 </p>
 
 <p align="center">
   <a href="https://faunabehav-api.onrender.com/docs"><b>FaunaBehav live demo</b></a> · interactive API docs, login <code>admin</code> / <code>demo-password</code> (first load can take a minute)
 </p>
-
-<p align="center">📌 <b>more pinned projects</b></p>
-
-<table>
-  <tr>
-    <td width="50%" valign="top">
-      <h3>🎀 <a href="https://github.com/tasniamoumi/veil">veil</a></h3>
-      <sub><b>HTML</b></sub>
-      <p>Privacy-first AI application that detects and masks sensitive information before prompts reach cloud-based AI models.</p>
-    </td>
-    <td width="50%" valign="top">
-      <h3>🩷 <a href="https://github.com/tasniamoumi/leadops">leadops</a></h3>
-      <sub><b>TypeScript</b></sub>
-      <p>Durable lead ingestion and delivery between website forms and a CRM.</p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <h3>✨ <a href="https://github.com/tasniamoumi/handframe">handframe</a></h3>
-      <sub><b>JavaScript</b></sub>
-      <p>Make a live filter window with your hands, in the browser.</p>
-    </td>
-    <td width="50%" valign="top"></td>
-  </tr>
-</table>
 
 <p align="center">🎀 ✦ ･ﾟ: *✧･ﾟ:* 🌸 *:･ﾟ✧*:･ﾟ ✦ 🎀</p>
 
